@@ -1,23 +1,16 @@
 
 import PropTypes from 'prop-types';
-import styles from './Feedback.module.css';
 
-function Feedback({ feedback }) {
-  const totalFeedback = feedback.good + feedback.neutral + feedback.bad;
-  const positivePercentage = totalFeedback
-    ? Math.round((feedback.good / totalFeedback) * 100)
-    : 0;
-
-  return (
-    <div className={styles.feedbackContainer}>
-      <p>Good: {feedback.good}</p>
-      <p>Neutral: {feedback.neutral}</p>
-      <p>Bad: {feedback.bad}</p>
-      <p>Total: {totalFeedback}</p>
-      <p>Positive: {positivePercentage}%</p>
-    </div>
-  );
-}
+const Feedback = ({ feedback, positivePercentage, totalFeedback }) => (
+  <div>
+    <h3>Statistics</h3>
+    <p>Good: {feedback.good}</p>
+    <p>Neutral: {feedback.neutral}</p>
+    <p>Bad: {feedback.bad}</p>
+    <p>Total: {totalFeedback}</p>
+    <p>Positive feedback: {positivePercentage.toFixed(2)}%</p>
+  </div>
+);
 
 Feedback.propTypes = {
   feedback: PropTypes.shape({
@@ -25,6 +18,8 @@ Feedback.propTypes = {
     neutral: PropTypes.number.isRequired,
     bad: PropTypes.number.isRequired,
   }).isRequired,
+  positivePercentage: PropTypes.number.isRequired,
+  totalFeedback: PropTypes.number.isRequired,
 };
 
 export default Feedback;
